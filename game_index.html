@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+	<title>Hangman</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="assests/css/style.css"> -->
+	<!-- <link rel="stylesheet" type="text/javascript" href="assets/javascript/game.js"> -->
+	
+</head>
+<body>
+	
+	<header>
+		<img src="" alt="">
+		<h1 class="text-center">IT'S IDIOM HANGMAN!</h2>
+		<h2 class="text-center"><em>"Take a stab at it!"</em></h2>
+		<h3 id="gameHeader"></h3>
+	</header>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2">
+			</div>
+			<div class="col-sm-4 panel panel-default">
+				<img class="img-rounded img responsive center-block" id="gameImage" src="http://placehold.it/150x150">
+			</div>	
+			<div class="col-sm-4 panel panel-default">
+	  			<p>Press any key to start!</p>
+				<p>Wins</p>
+				<p id="totalWins"></p> 
+				<p>Current Word</p>
+				<p id="currentWord"></p>
+				<p>Number of Guesses Remaining</p>
+				<p id="guessesRemaining"></p> 
+				<p>Letters Already Guessed</p>
+				<p id="alreadyGuessed"></p>
+			</div>
+			<div class="col-sm-2">
+			</div>
+		</div>
+	</div>	
+
+</body>
+
+	<script type="text/javascript"> //src="game.js"> 
+		
+	var wins = 0;
+	var wordOptions = ["your guess is as good as mine", "a little bird told me", "heard it through the grapevine", "piece of cake", "once in a blue moon", "method to my madness", "it takes two to tango", "at the drop of a hat"];
+	var randomWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
+	var numGuess = 6;
+	var incorrectLetters = [];
+	var currentWord = [];
+
+	// document.querySelector("#numWins").innerHTML = wins;
+
+
+	for (var i = 0; i < randomWord.length; i++) {
+		if (randomWord[i] === " ") {
+			currentWord.push("&nbsp;");
+		}	
+		else {
+			currentWord.push("_");
+		}	
+	}
+
+	console.log(randomWord);
+	console.log(currentWord);
+
+	//THIS CODE BELOW CREATES VISUAL CHANGE: REMOVING COMMAS AFTER SPACE ((FROM THIS: "__," TO THIS: "__" ))//
+	
+	var currentWordHTML = currentWord.join(" ");
+	
+	document.querySelector("#currentWord").innerHTML = currentWordHTML;
+	
+	// THIS CODE SHOWS THE NUMBER OF GUESS REMAINING //
+
+	document.querySelector("#guessesRemaining").innerHTML = numGuess;
+
+	// STARTS THE GAME ONCE USER PRESSES KEY //
+
+	document.onkeyup= function(event) {
+		var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+		// IF USER PICKS A CORRECT LETTER //
+		if (randomWord.indexOf(userGuess) >= 0) {
+			console.log("Correct");
+			for (var i = 0; i < randomWord.length; i++) {
+				if (randomWord[i] === userGuess) {
+					currentWord[i] = userGuess;
+				}
+			}
+			currentWordHTML = currentWord.join(" ");
+			document.querySelector("#currentWord").innerHTML = currentWordHTML;
+		}
+
+			// IF USER PICKS LETTER ALREADY USED //
+		else if (incorrectLetters.indexOf(userGuess) >= 0){
+			console.log("Already Guessed");
+		}
+			// IF USER PICKS A WRONG LETTER //
+		else{
+			numGuess --; 
+			incorrectLetters.push(userGuess);
+			
+			document.querySelector("#guessesRemaining").innerHTML = numGuess;		
+
+			incorrectLetters.push(userGuess);
+
+			incorrectLettersHTML = incorrectLetters.join(" ");
+			document.querySelector("#incorrectLetters").innerHTML = incorrectLettersHTML;
+
+
+		
+			console.log("Wrong");
+			console.log(incorrectLetters);
+			
+			
+		}		//THIS CODE BELOW = USER CHANGED GUESSES AND 			NOW IT WILL REDISPLAY IT//
+	}			//	document.querySelector("#guessesRemaining").			innerHTML = numGuess;
+				
+				//incorrectLetters.push(userGuess);
+			
+				//document.querySelector("#alreadyGuessed").innerHTML = incorrectLetters;
+		
+	
+
+	</script>
+	</body>
+</html>
