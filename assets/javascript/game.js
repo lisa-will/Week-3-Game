@@ -44,7 +44,7 @@ document.querySelector("#guessesRemaining").innerHTML = numGuess;
 document.onkeyup= function(event) {
 
 	if (numGuess == 7) {
-		document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/1.png">'
+		document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/2.png">'
 	}
 
 		
@@ -103,6 +103,7 @@ document.onkeyup= function(event) {
 
 			else if (numGuess == 1) {
 				document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/9.png">'
+				alert("THIS IS YOUR LAST CHANCE TO GET IT RIGHT!")
 			}
 
 			else if (numGuess == 0) {
@@ -131,12 +132,14 @@ document.onkeyup= function(event) {
 				document.querySelector("#currentWord").innerHTML = currentWordHTML;
 				document.querySelector("#guessesRemaining").innerHTML = numGuess;
 				document.querySelector("#alreadyGuessed").innerHTML = incorrectLetters;
+				alert("HAHA! I WIN!\nLET'S PLAY AGAIN!")
+				document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/1.png">'
 			}
 		}
 
 		if (currentWord.indexOf("_") < 0) {
 			console.log("YOU WIN!");
-			document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/2.png">'
+			document.querySelector(".imageDiv").innerHTML = '<img id="cat" src="assets/images/purrrfect/1.png">'
 			wins++;
 			randomWord = wordOptions[Math.floor(Math.random() * wordOptions.length)];
 			numGuess = 7;
@@ -161,6 +164,7 @@ document.onkeyup= function(event) {
 			document.querySelector("#currentWord").innerHTML = currentWordHTML;
 			document.querySelector("#guessesRemaining").innerHTML = numGuess;
 			document.querySelector("#alreadyGuessed").innerHTML = incorrectLetters;
+			alert("OKAY WISE GUY, YOU MAY HAVE WON THAT ROUND.\nLET'S JUST SEE IF YOU CAN DO THAT AGAIN!")
 		}
 	}	
 
