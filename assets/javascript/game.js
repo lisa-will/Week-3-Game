@@ -155,7 +155,7 @@ document.onkeyup= function(event) {
 			console.log(randomWord);
 			console.log(currentWord);
 
-			document.querySelector("#wins").innerHTML = wins;
+			document.querySelector("#totalWins").innerHTML = wins;
 
 			currentWordHTML = currentWord.join(" ");
 			document.querySelector("#currentWord").innerHTML = currentWordHTML;
